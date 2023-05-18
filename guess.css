@@ -9,6 +9,7 @@
 }
 .correct{
     background-color: green;
+    background: url('../images/giphy.gif');
 }
 .fail{
     background-color: red;
@@ -68,6 +69,8 @@ h1{
     cursor: pointer;
     border: none;
     color: #eee;
+    letter-spacing: 2.5px;
+    font-weight: 600;
     
 }
 /* .again{
@@ -93,7 +96,7 @@ h1{
     font-size: 2.5rem;
     background-color: goldenrod;
     color: #eee;
-    border-radius: 10%;
+    border-radius: 8px;
     text-align: center;
     font-family: "press start 2P";
     outline: none;
@@ -123,6 +126,26 @@ small{
     justify-content: space-around;
     align-self: center;
 }
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mute{
+    position: absolute;
+    right: 0;
+    bottom: 2%;
+    border-radius: 20px;
+    width: 50px;
+    height: 50px;
+}
+.mute img:nth-child(1){
+    display: none;
+}
+.mute img:nth-child(2){
+    width: 45px;
+}
 
 @media (min-width: 650px){
     body{
@@ -133,6 +156,9 @@ small{
     }
     .left, .right{
         width: 50%;
+        height: 30vh;
+        border: 2px solid #af975b52;
+        justify-content: center;
     }
     main{
         width: 100%;
@@ -140,7 +166,67 @@ small{
         flex-direction: row;
         justify-content: space-between;
     }
+    .label-score{
+        border: 2px solid #e4b53c49;
+        padding: 10px;
+    }
     .label-highscore{
         margin-top: 1rem;
+        display: block;
+    }
+    .btn-container{
+        width: 50%;
+    }
+    .label-highscore-mobile{
+        display: none;
+    }
+    .mute{
+        bottom: 5%;
+        right: 3%;
+    }
+}
+
+/* Ipads */
+@media (min-width: 768px) and (max-width: 950px) {
+    main{
+        flex-direction: column;
+    }
+    .right, .left{
+        width: 100%;
+    }
+    .warning{
+        width: 80%;
+        text-align: center;
+        align-self: center;
+    }
+
+}
+@media (min-width: 950px){
+    main{
+        height: 65vh;
+    }
+}
+
+
+/* Animations */
+.number{
+    animation: float 5s ease-in-out;
+    animation-iteration-count: 10;
+}
+@keyframes float{
+    0%{
+        transform: translateY(0);
+    }
+    25%{
+        transform: translateY(-15px);
+    }
+    50%{
+        transform: translateY(15px);
+    }
+    75%{
+        transform: translateY(-15px);
+    }
+    100%{
+        transform: translateY(0);
     }
 }

@@ -8,6 +8,10 @@ let trials = document.querySelector('.trials');
 const warning = document.querySelector('.warning');
 const msg = document.querySelector('.message');
 const body = document.querySelector('body');
+const between = document.querySelector('.between');
+const muteButton = document.querySelector('#mute-button');
+const img1 = document.querySelector('.mute img:nth-child(1)');
+const img2 = document.querySelector('.mute img:nth-child(2)');
 
 
 
@@ -40,6 +44,51 @@ const playGameOverSound = function() {
 };
 
 
+
+// Reset function
+const handleReset = () => {
+    // reset game specific variables
+    guess.value = '';
+    trials.innerHTML = '5'
+
+    // reset DOM
+    display.style.color = "#eee";
+    number.style.color = "#222";
+    display.innerHTML = 'Guess My Number'
+    number.innerHTML = '?';
+    check.removeAttribute("disabled");
+    check.style.opacity = '1'
+    msg.innerHTML = "Start guessing..."
+    body.classList.add('body');
+    body.classList.remove('fail', 'correct');
+};
+
+
+let isMuted = false;
+
+// function to toggle mute/unmute
+const toggleMute = () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        // mute all audio elements
+        correctSound.muted = true;
+        wrongSound.muted = true;
+        gameOverSound.muted = true;
+        img1.style.display = 'block';
+        img2.style.display = 'none';
+    } else {
+        // unmute all audio elements
+        correctSound.muted = false;
+        wrongSound.muted = false;
+        gameOverSound.muted = false;
+        img1.style.display = 'none';
+        img2.style.display = 'block';
+    }
+};
+
+
+
+// Game function
 const playGames = function(){
     let randomNum = Math.ceil(Math.random() * 5);
 // console.log(randomNum);    
@@ -51,6 +100,7 @@ trials.innerHTML--;
 
 
 
+// Conditonals
 if (guess.value == null || guess.value < 1 || guess.value > 5 || guess.value == "")
 {
     playClickSound()
@@ -62,11 +112,15 @@ if (guess.value == null || guess.value < 1 || guess.value > 5 || guess.value == 
     // console.log("You're Correct");
     playCorrectSound()
     display.innerHTML = "Correct!!!";
+    display.style.color = "green";
     number.innerHTML = randomNum;
+    number.style.color = "green";
     body.classList.remove("fail")
     body.classList.remove("body")
     body.classList.add("correct")
-    // document.body.style.backgroundColor = "green";
+    check.style.opacity = '0.6'
+    msg.innerHTML = "Play again!!"
+    between.innerHTML = "Play again"
 
 }else if(trials.innerHTML ==0){
     playGameOverSound()
@@ -77,10 +131,12 @@ if (guess.value == null || guess.value < 1 || guess.value > 5 || guess.value == 
     guess.value = ""
     number.innerHTML = "?"
     check.setAttribute("disabled", "true")
+    check.style.opacity = '0.6'
     msg.innerHTML = "Play again"
+    between.innerHTML = "Play again"
 
 }else{
-    playWrongSound()
+    playClickSound()
     body.classList.remove("body")
     body.classList.remove("correct")
     body.classList.add("fail")
@@ -97,13 +153,15 @@ if (guess.value == null || guess.value < 1 || guess.value > 5 || guess.value == 
 
 
 
-// playGames()
-check.addEventListener('click', playGames);
-reset.addEventListener('click', handleReset);
-console.log(window);
+// Event Listeners playGames()
+check.addEventListener('click', (event) => {
+    event.preventDefault();
+    playGames();
+} );
 
+reset.addEventListener('click', (event) => {
+    event.preventDefault();
+    handleReset();
+} );
 
-// reset function
-function handleReset(){
-    window.location.reload()
-}
+muteButton.addEventListener('click', toggleMute);

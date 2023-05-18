@@ -7,15 +7,19 @@
     <link rel="stylesheet" href="./guess.css">
     <title>Guess your number</title>
 </head>
-<body>
+<body class="body">
+  <button class="mute" id="mute-button">
+    <img src="../images/icons8-mute-48.png" alt="">
+    <img src="../images/icons8-volume-64.png" alt="">
+  </button>
     <!-- <a href="/">Home</a>
     <a href="./counter.html">counter</a>
     <a href="./guess.html">Guess Game</a> -->
     <header>
         <h1 id="display">Guess My Number!</h1>
         <p class="between">(Between 1 and 5)</p>
-        
         <div class="number">?</div>
+        <p class="label-score">Trials: <span class="trials">5</span></p>
       </header>
       <!-- Audio -->
       <audio id="click-sound" src="./sounds/mixkit-play-small-hit-in-a-game-2072.wav"></audio>
@@ -34,8 +38,8 @@
           <!-- <h6>(Numbers Ranging from 1 to 5)</h6> -->
           <p class="warning"></p>
           <div class="btn-container">
-          <button class="btn check">Check!</button>
-          <button class="btn again">Play again!</button>
+             <button class="btn check">Submit</button>
+             <button class="btn again">Play again!</button>
           </div>
         </form>
         </section>
